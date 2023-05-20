@@ -110,7 +110,7 @@ hr {
   :root {
     --fs-900: 3.5rem;
     --fs-800: 3rem;
-    --fs-700: 2rem;
+    --fs-700: 2.5rem;
   }
 } 
 
@@ -150,6 +150,11 @@ hr {
 }
 
 .container {
+  padding: 1em;
+  margin-inline: auto;
+}
+
+.wrapper {
   padding: 1em;
   margin-inline: auto;
 }
@@ -384,11 +389,15 @@ hr {
 
 @media (min-width: 35em) {
   .nav-text {
-    color: var(--clr-grayish-blue);
+    color: var(--clr-dark-blue);
   }
 }
 
-
+.hover-text:hover,
+.hover-text:focus {
+  color: var(--clr-orange);
+  cursor: pointer;
+}
 
 /* ----------------------------- */
 /* Layout                        */
@@ -403,26 +412,31 @@ hr {
   place-items: center;
   padding-inline: 1rem;
   padding-bottom: 4rem;
-  grid-template-columns: minmax(0, 50rem);
 
   grid-template-areas: 
-  'top'
+  'top-image'
+  'top-content'
   'middle'
   'bottom';
 }
 
-.top {
-  grid-area: top;
+.grid-container > .top-image {
+  grid-area: top-image;
 }
 
-.middle {
+.grid-container > .top-content {
+  grid-area: top-content;
+}
+
+.grid-container > .middle {
   grid-area: middle;
 }
 
-.bottom {
+.grid-container > .bottom {
   grid-area: bottom;
-  margin-block-start: 1.5em;
 }
+
+
 
 .middle h2 {
   margin-block-end: 1em;
@@ -440,12 +454,17 @@ hr {
 
 .bottom-content h4 {
   margin: .5rem 0;
+  flex: 1 0 50px;
+}
+
+.bottom-image {
+  flex: 0 1 50px;
 }
 
 .grid-container--bottom {
   display: grid;
-  align-items: end;
-  grid-template-columns: minmax(0, 40%) minmax(0, 60%);
+  place-items: start;
+  grid-template-columns: auto 60%;
   grid-template-areas: 'image content';
 }
 
@@ -455,8 +474,58 @@ hr {
 
 .grid-container--bottom > .bottom-image {
   grid-area: image;
-  
 }
 
+/* desktop layout */
+
+@media (min-width: 45em) {
+
+  hr {
+    margin-block: 2rem;
+  }
+
+  .container {
+    width: 90%;
+  }
+  
+  .grid-container {
+    display: grid;
+    gap: 2rem;
+    place-items: start;
+    justify-items: start;
+    grid-template-areas: 
+    'top-image top-image middle'
+    'top-content top-content middle'
+    'bottom bottom bottom';
+  }
+
+  .flex-container {
+    flex-direction: row;
+  }
+
+  .top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  .text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 45%;
+    line-height: 2;
+  }
+
+  .button {
+    /* margin-top: 4em; */
+    align-self: flex-start;
+  }
+
+  .title-content {
+    flex-basis: 40%;
+  }
+
+}
 
 
